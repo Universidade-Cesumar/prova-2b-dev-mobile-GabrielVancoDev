@@ -10,6 +10,10 @@ export default function App() {
   );
 }
 
+/**
+ * Os alunos vão construir os componentes visuais das Sprints aqui dentro
+ */
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

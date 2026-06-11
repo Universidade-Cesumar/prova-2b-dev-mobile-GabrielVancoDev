@@ -20,9 +20,27 @@ export default function App() {
   // Estado de carregamento
   const [loading, setLoading] = useState(false);
 
-  const API_URL = 'Shttps://6a18c32223c3626470abff91.mockapi.io/:endpoint'; // API de exemplo para fins de demonstração
+  const API_URL = "Shttps://6a18c32223c3626470abff91.mockapi.io/:endpoint"; // API de exemplo para fins de demonstração
 
   // --- Funções de Requisição e Efeitos (Os alunos implementarão aqui) ---
+
+  // Requisição para buscar materiais
+  const buscarMateriais = async () => {
+    try {
+      setLoading(true);
+  // 
+      const response = await fetch(API_URL);
+      const dados = await response.json();
+
+  // Injeção dos dados na lista
+      setMateriais(dados);
+    } catch (error) {
+      // Tratamento de erro
+      console.log("Erro ao buscar materiais:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <View style={styles.container}>

@@ -46,6 +46,10 @@ export default function App() {
 
   // Requisição para cadastrar materiais
   const cadastrarMaterial = async () => {
+    if (!nome || !quantidade) {
+      alert("Preencha todos os campos.");
+      return;
+    }
     try {
       // Cria um novo material
       const novoMaterial = {

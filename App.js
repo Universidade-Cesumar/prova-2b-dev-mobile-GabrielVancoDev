@@ -106,7 +106,11 @@ export default function App() {
         onChangeText={setQuantidade}
       />
 
-      <TouchableOpacity testID="btn-cadastrar" style={styles.botao}>
+      <TouchableOpacity
+        testID="btn-cadastrar"
+        style={styles.botao}
+        onPress={cadastrarMaterial}
+      >
         <Text style={styles.textoBotao}>Cadastrar</Text>
       </TouchableOpacity>
 

@@ -52,18 +52,28 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Almoxarifado - Enfermagem</Text>
-
       {/* Breve descrição do projeto inserida abaixo */}
-      <Text style={styles.description}>
+      {/* <Text style={styles.description}>
         Este template servirá para desenvolver o projeto responsável por
         modernizar o controle de insumos médicos do almoxarifado. Através desta
         interface conectada à API, é possível realizar o inventário em tempo
         real, cadastrar novos materiais e registrar baixas de estoque de forma
         ágil e segura.
-      </Text>
-
+      </Text> */}
       <Text>Quantidade de materiais: {materiais.length}</Text>
 
+      <FlatList
+        testID="lista-materiais"
+        data={materiais}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View style={styles.card}>
+            <Text style={styles.nomeMaterial}>{item.nome}</Text>
+
+            <Text>Quantidade: {item.quantidade}</Text>
+          </View>
+        )}
+      />
       {/* Os alunos vão construir os componentes visuais das Sprints aqui dentro */}
     </View>
   );

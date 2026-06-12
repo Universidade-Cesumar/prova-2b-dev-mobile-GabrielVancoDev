@@ -44,6 +44,35 @@ export default function App() {
     // --- Fim da Função de Requisição ---
   };
 
+  // Requisição para cadastrar materiais
+  const cadastrarMaterial = async () => {
+    try {
+      // Cria um novo material
+      const novoMaterial = {
+        nome: nome,
+        quantidade: Number(quantidade),
+      };
+      // Envia o material para a API
+      await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(novoMaterial),
+      });
+
+      // Limpa os campos
+      setNome("");
+      setQuantidade("");
+
+      // Atualiza a lista
+      buscarMateriais();
+    } catch (error) {
+      console.log("Erro ao cadastrar material:", error);
+    }
+  };
+  // --- Fim da Função de Requisição ---
+
   // Efeito de atualização da lista de materiais
   useEffect(() => {
     buscarMateriais();

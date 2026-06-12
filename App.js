@@ -130,4 +130,24 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 10,
+  },
+
+  botao: {
+    backgroundColor: "#1976D2",
+    padding: 12,
+    borderRadius: 8,
+    alignItems: "center",
+    marginBottom: 15,
+  },
+
+  textoBotao: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
 });

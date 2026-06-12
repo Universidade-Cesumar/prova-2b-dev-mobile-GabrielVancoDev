@@ -20,7 +20,7 @@ export default function App() {
   // Estado de carregamento
   const [loading, setLoading] = useState(false);
 
-  const API_URL = "Shttps://6a18c32223c3626470abff91.mockapi.io/:endpoint"; // API de exemplo para fins de demonstração
+  const API_URL = "https://6a18c32223c3626470abff91.mockapi.io/materiais"; // API de exemplo para fins de demonstração
 
   // --- Funções de Requisição e Efeitos (Os alunos implementarão aqui) ---
 
@@ -28,11 +28,11 @@ export default function App() {
   const buscarMateriais = async () => {
     try {
       setLoading(true);
-  // 
+      //
       const response = await fetch(API_URL);
       const dados = await response.json();
 
-  // Injeção dos dados na lista
+      // Injeção dos dados na lista
       setMateriais(dados);
     } catch (error) {
       // Tratamento de erro
@@ -40,7 +40,14 @@ export default function App() {
     } finally {
       setLoading(false);
     }
+
+    // --- Fim da Função de Requisição ---
   };
+
+  // Efeito de atualização da lista de materiais
+  useEffect(() => {
+    buscarMateriais();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -54,6 +61,8 @@ export default function App() {
         real, cadastrar novos materiais e registrar baixas de estoque de forma
         ágil e segura.
       </Text>
+
+      <Text>Quantidade de materiais: {materiais.length}</Text>
 
       {/* Os alunos vão construir os componentes visuais das Sprints aqui dentro */}
     </View>

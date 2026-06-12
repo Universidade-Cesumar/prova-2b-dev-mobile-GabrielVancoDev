@@ -60,7 +60,26 @@ export default function App() {
         real, cadastrar novos materiais e registrar baixas de estoque de forma
         ágil e segura.
       </Text> */}
-      <Text>Quantidade de materiais: {materiais.length}</Text>
+      <TextInput
+        testID="input-nome"
+        style={styles.input}
+        placeholder="Nome do material"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      <TextInput
+        testID="input-quantidade"
+        style={styles.input}
+        placeholder="Quantidade"
+        keyboardType="numeric"
+        value={quantidade}
+        onChangeText={setQuantidade}
+      />
+
+      <TouchableOpacity testID="btn-cadastrar" style={styles.botao}>
+        <Text style={styles.textoBotao}>Cadastrar</Text>
+      </TouchableOpacity>
 
       <FlatList
         testID="lista-materiais"

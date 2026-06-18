@@ -9,6 +9,23 @@ import {
   ActivityIndicator,
 } from "react-native";
 
+// Função de validação de retirada
+export function validarRetirada(estoqueAtual, quantidadeRetirada) {
+  const estoque = Number(estoqueAtual);
+  const retirada = Number(quantidadeRetirada);
+
+  // Verifica se a retirada é maior que o estoque
+  if (retirada <= 0) {
+    return false;
+  }
+  
+  if (retirada > estoque) {
+    return false;
+  }
+
+  return true;
+}
+
 export default function App() {
   // Estados do formulário
   const [nome, setNome] = useState("");

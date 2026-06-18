@@ -97,6 +97,17 @@ export default function App() {
   };
   // --- Fim da Função de Requisição ---
 
+  const excluirMaterial = async (id) => {
+    try {
+      await fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+      });
+
+      buscarMateriais();
+    } catch (error) {
+      console.log("Erro ao excluir material:", error);
+    }
+  };
   // Efeito de atualização da lista de materiais
   useEffect(() => {
     buscarMateriais();
@@ -166,7 +177,7 @@ export default function App() {
               <Text style={styles.textoBotao}>Baixar estoque</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity testID="btn-excluir" style={styles.botaoExcluir}>
+            <TouchableOpacity testID="btn-excluir" style={styles.botaoExcluir} onPress={() => excluirMaterial(item.id)} >
               <Text style={styles.textoBotao}>Excluir</Text>
             </TouchableOpacity>
           </View>

@@ -18,7 +18,7 @@ export function validarRetirada(estoqueAtual, quantidadeRetirada) {
   if (retirada <= 0) {
     return false;
   }
-  
+
   if (retirada > estoque) {
     return false;
   }
@@ -36,6 +36,9 @@ export default function App() {
 
   // Estado de carregamento
   const [loading, setLoading] = useState(false);
+
+  // Estados de retiradas
+  const [retiradas, setRetiradas] = useState({});
 
   const API_URL = "https://6a18c32223c3626470abff91.mockapi.io/materiais"; // API de exemplo para fins de demonstração
 

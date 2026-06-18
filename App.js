@@ -147,10 +147,31 @@ export default function App() {
             <Text style={styles.nomeMaterial}>{item.nome}</Text>
 
             <Text>Quantidade: {item.quantidade}</Text>
+
+            <TextInput
+              testID="input-retirada"
+              style={styles.input}
+              placeholder="Quantidade a retirar"
+              keyboardType="numeric"
+              value={retiradas[item.id] || ""}
+              onChangeText={(valor) =>
+                setRetiradas({
+                  ...retiradas,
+                  [item.id]: valor,
+                })
+              }
+            />
+
+            <TouchableOpacity testID="btn-baixar" style={styles.botaoBaixar}>
+              <Text style={styles.textoBotao}>Baixar estoque</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity testID="btn-excluir" style={styles.botaoExcluir}>
+              <Text style={styles.textoBotao}>Excluir</Text>
+            </TouchableOpacity>
           </View>
         )}
       />
-      {/* Os alunos vão construir os componentes visuais das Sprints aqui dentro */}
     </View>
   );
 }
@@ -206,5 +227,21 @@ const styles = StyleSheet.create({
   textoBotao: {
     color: "#fff",
     fontWeight: "bold",
+  },
+
+  botaoBaixar: {
+    backgroundColor: "#2E7D32",
+    padding: 10,
+    borderRadius: 8,
+    alignItems: "center",
+    marginTop: 8,
+  },
+
+  botaoExcluir: {
+    backgroundColor: "#C62828",
+    padding: 10,
+    borderRadius: 8,
+    alignItems: "center",
+    marginTop: 8,
   },
 });

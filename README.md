@@ -222,7 +222,221 @@ Ao final desta Sprint foi possível:
 
 ---
 
+## Objetivos da Sprint 3
+
+Concluir o sistema de almoxarifado implementando funcionalidades de monitoramento, pesquisa e usabilidade, proporcionando uma experiência mais profissional ao usuário e permitindo uma visualização rápida da situação do estoque.
+
+---
+
+## Funcionalidades Implementadas na Sprint 3
+
+### Dashboard de Estoque
+
+Foi implementado um painel de indicadores responsável por apresentar informações resumidas sobre o estoque em tempo real.
+
+Indicadores disponíveis:
+
+* Total de materiais cadastrados.
+* Quantidade de materiais com estoque crítico.
+* Quantidade de materiais sem estoque.
+
+Benefícios:
+
+* Visualização rápida da situação do almoxarifado.
+* Apoio na tomada de decisão para reposição de materiais.
+* Melhor experiência para o usuário.
+
+---
+
+### Pesquisa de Materiais em Tempo Real
+
+Foi desenvolvido um sistema de busca dinâmica que permite localizar materiais instantaneamente conforme o usuário digita.
+
+Características:
+
+* Pesquisa sem necessidade de botão.
+* Atualização automática da lista.
+* Busca por nome do material.
+* Integração com o totalizador de itens.
+
+Componente obrigatório implementado:
+
+```jsx
+testID="input-busca"
+```
+
+---
+
+### Totalizador Dinâmico
+
+Foi implementado um componente responsável por exibir a quantidade de materiais atualmente visíveis na tela.
+
+O totalizador considera:
+
+* Todos os materiais cadastrados.
+* Os filtros aplicados pelo campo de pesquisa.
+
+Componente obrigatório implementado:
+
+```jsx
+testID="total-itens"
+```
+
+Exemplo:
+
+```text
+Exibindo 8 item(ns)
+```
+
+---
+
+### Indicador Visual de Estoque Crítico
+
+Materiais com quantidade inferior a 10 unidades recebem destaque visual automático para facilitar a identificação de possíveis problemas de abastecimento.
+
+Critério utilizado:
+
+```javascript
+quantidade < 10
+```
+
+Características:
+
+* Cor diferenciada para itens críticos.
+* Destaque visual para facilitar a identificação.
+* Compatibilidade com testes automatizados.
+
+Implementação obrigatória:
+
+```jsx
+accessibilityLabel="estoque-critico"
+```
+
+---
+
+### Indicador de Material Sem Estoque
+
+Materiais com quantidade igual a zero recebem destaque especial no painel.
+
+Características:
+
+* Cor diferenciada.
+* Identificação visual imediata.
+* Facilita o controle de reposição.
+
+Critério utilizado:
+
+```javascript
+quantidade === 0
+```
+
+---
+
+### Tratamento de Erros de Rede
+
+Todas as operações de comunicação com a API foram protegidas utilizando blocos `try/catch`.
+
+Operações protegidas:
+
+* Buscar materiais (GET)
+* Cadastrar materiais (POST)
+* Atualizar estoque (PUT)
+* Excluir materiais (DELETE)
+
+Benefícios:
+
+* Evita travamentos da aplicação.
+* Exibe mensagens amigáveis ao usuário.
+* Melhora a robustez do sistema.
+
+Exemplo:
+
+```javascript
+try {
+  // operação
+} catch (error) {
+  alert("Ocorreu um erro de conexão.");
+}
+```
+
+---
+
+### Refinamento da Interface
+
+A interface foi completamente reformulada para proporcionar uma experiência mais moderna e intuitiva.
+
+Melhorias realizadas:
+
+* Dashboard com indicadores de estoque.
+* Cartões visuais para materiais.
+* Badges de status.
+* Paleta de cores padronizada.
+* Campos de busca e cadastro aprimorados.
+* Organização visual dos botões de ação.
+* Destaques automáticos para materiais críticos.
+
+---
+
+## Requisitos Obrigatórios Atendidos
+
+* Campo de pesquisa com `testID="input-busca"`
+* Totalizador com `testID="total-itens"`
+* Filtro em tempo real
+* Dashboard de indicadores
+* Destaque visual para estoque crítico
+* Utilização de `accessibilityLabel="estoque-critico"`
+* Tratamento de erros utilizando `try/catch`
+* README atualizado
+* Projeto publicado no GitHub
+
+---
+
+## Resultados da Sprint 3
+
+Ao final desta Sprint foi possível:
+
+* Implementar um dashboard de acompanhamento do estoque.
+* Pesquisar materiais em tempo real.
+* Identificar rapidamente materiais críticos.
+* Identificar materiais sem estoque.
+* Melhorar significativamente a experiência do usuário.
+* Tornar o sistema mais resiliente contra falhas de rede.
+* Finalizar a primeira versão completa do sistema de almoxarifado.
+
+---
+
+## Capturas de Tela
+
+Adicionar imagens do sistema em funcionamento:
+
+### Dashboard Principal
+
+<img width="1601" height="913" alt="image" src="https://github.com/user-attachments/assets/a3280687-4d7e-4395-96c9-41fcf7191810" />
+
+### Cadastro de Materiais
+
+<img width="1602" height="915" alt="image" src="https://github.com/user-attachments/assets/ebd39295-127b-4b21-859b-e5d0e2062686" />
+
+### Pesquisa de Materiais
+
+<img width="1596" height="911" alt="image" src="https://github.com/user-attachments/assets/40b23028-adbd-4080-b0f6-f2079ff747dc" />
+
+### Estoque Crítico
+
+Inserir screenshot destacando materiais com quantidade inferior a 10 unidades.
+
+### Baixa de Estoque
+
+<img width="1601" height="913" alt="image" src="https://github.com/user-attachments/assets/12b1cd21-bb92-431f-b7b4-39cbf7447102" />
 
 
+---
 
+## Conclusão do Projeto
+
+O desenvolvimento deste projeto permitiu aplicar conceitos fundamentais de desenvolvimento mobile utilizando React Native e Expo, além de consolidar conhecimentos relacionados ao consumo de APIs REST, gerenciamento de estado, manipulação de listas, validações de negócio, tratamento de erros e experiência do usuário.
+
+Ao longo das três Sprints, o sistema evoluiu de uma simples listagem de materiais para uma aplicação funcional de controle de estoque, capaz de cadastrar, consultar, atualizar, excluir, pesquisar e monitorar materiais em tempo real.
+
+Além da implementação técnica, o projeto proporcionou experiência prática com Git, GitHub, documentação de software, integração contínua e desenvolvimento incremental de funcionalidades utilizando uma abordagem baseada em Sprints.
 

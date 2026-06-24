@@ -40,6 +40,9 @@ export default function App() {
   // Estados de retiradas
   const [retiradas, setRetiradas] = useState({});
 
+  // Estado de Busca
+  const [busca, setBusca] = useState("");
+
   const API_URL = "https://6a18c32223c3626470abff91.mockapi.io/materiais"; // API de exemplo para fins de demonstração
 
   // --- Funções de Requisição e Efeitos (Os alunos implementarão aqui) ---
@@ -97,6 +100,7 @@ export default function App() {
   };
   // --- Fim da Função de Requisição ---
 
+  // Requisição para excluir materiais
   const excluirMaterial = async (id) => {
     try {
       await fetch(`${API_URL}/${id}`, {
@@ -108,10 +112,49 @@ export default function App() {
       console.log("Erro ao excluir material:", error);
     }
   };
+
+  // Requisição para registrar retiradas
+  const baixarEstoque = async (item) => {
+    const quantidadeRetirada = retiradas[item.id];
+
+    if (!validarRetirada(item.quantidade, quantidadeRetirada)) {
+      alert("Retirada inválida. Verifique a quantidade em estoque.");
+      return;
+    }
+
+    const novaQuantidade = Number(item.quantidade) - Number(quantidadeRetirada);
+
+    try {
+      await fetch(`${API_URL}/${item.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...item,
+          quantidade: novaQuantidade,
+        }),
+      });
+
+      setRetiradas({
+        ...retiradas,
+        [item.id]: "",
+      });
+
+      buscarMateriais();
+    } catch (error) {
+      console.log("Erro ao baixar estoque:", error);
+    }
+  };
+
   // Efeito de atualização da lista de materiais
   useEffect(() => {
     buscarMateriais();
   }, []);
+
+  const materiaisFiltrados = materiais.filter((item) =>
+    item.nome.toLowerCase().includes(busca.toLowerCase()),
+  );
 
   return (
     <View style={styles.container}>
@@ -124,6 +167,19 @@ export default function App() {
         real, cadastrar novos materiais e registrar baixas de estoque de forma
         ágil e segura.
       </Text> */}
+
+      <TextInput
+        testID="input-busca"
+        style={styles.input}
+        placeholder="Pesquisar material"
+        value={busca}
+        onChangeText={setBusca}
+      />
+
+      <Text testID="total-itens" style={styles.totalItens}>
+        Total de itens listados: {materiaisFiltrados.length}
+      </Text>
+
       <TextInput
         testID="input-nome"
         style={styles.input}
@@ -151,14 +207,22 @@ export default function App() {
 
       <FlatList
         testID="lista-materiais"
-        data={materiais}
+        data={materiaisFiltrados}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.card}>
-            <Text style={styles.nomeMaterial}>{item.nome}</Text>
-
-            <Text>Quantidade: {item.quantidade}</Text>
-
+          <View
+            style={[
+              styles.card,
+              Number(item.quantidade) < 10 && styles.cardCritico,
+            ]}
+            accessibilityLabel={
+              Number(item.quantidade) < 10 ? "estoque-critico" : undefined
+            }
+          >
+            <Text style={styles.cardTitulo}>{item.nome}</Text>
+            <Text style={styles.cardQuantidade}>
+              Quantidade: {item.quantidade}
+            </Text>
             <TextInput
               testID="input-retirada"
               style={styles.input}
@@ -173,11 +237,19 @@ export default function App() {
               }
             />
 
-            <TouchableOpacity testID="btn-baixar" style={styles.botaoBaixar}>
+            <TouchableOpacity
+              testID="btn-baixar"
+              style={styles.botaoBaixar}
+              onPress={() => baixarEstoque(item)}
+            >
               <Text style={styles.textoBotao}>Baixar estoque</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity testID="btn-excluir" style={styles.botaoExcluir} onPress={() => excluirMaterial(item.id)} >
+            <TouchableOpacity
+              testID="btn-excluir"
+              style={styles.botaoExcluir}
+              onPress={() => excluirMaterial(item.id)}
+            >
               <Text style={styles.textoBotao}>Excluir</Text>
             </TouchableOpacity>
           </View>
@@ -213,6 +285,12 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
     marginTop: 10,
+  },
+
+  cardCritico: {
+    backgroundColor: "#FFE5E5",
+    borderWidth: 1,
+    borderColor: "#C62828",
   },
 
   nomeMaterial: {

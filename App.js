@@ -314,36 +314,80 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F4F7FB",
+    backgroundColor: "#EEF2F7",
     paddingTop: 50,
     paddingHorizontal: 18,
   },
 
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: "bold",
+    color: "#111827",
     textAlign: "center",
-    marginBottom: 18,
-    color: "#1F2937",
   },
 
-  description: {
+  subtitle: {
     fontSize: 14,
     color: "#6B7280",
     textAlign: "center",
-    lineHeight: 20,
-    marginBottom: 24,
+    marginBottom: 18,
+  },
+
+  dashboard: {
+    flexDirection: "row",
+    gap: 10,
+    marginBottom: 16,
+  },
+
+  dashboardCard: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 10,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+  },
+
+  dashboardNumber: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#2563EB",
+  },
+
+  dashboardLabel: {
+    fontSize: 11,
+    color: "#6B7280",
+    textAlign: "center",
+    marginTop: 4,
+  },
+
+  formCard: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 18,
+    padding: 14,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+  },
+
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#1F2937",
+    marginBottom: 10,
   },
 
   input: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#F9FAFB",
     borderWidth: 1,
     borderColor: "#D1D5DB",
     borderRadius: 12,
     paddingHorizontal: 14,
-    paddingVertical: 12,
+    paddingVertical: 11,
     marginBottom: 10,
-    fontSize: 15,
+    fontSize: 14,
     color: "#111827",
   },
 
@@ -352,7 +396,6 @@ const styles = StyleSheet.create({
     paddingVertical: 13,
     borderRadius: 12,
     alignItems: "center",
-    marginBottom: 18,
   },
 
   textoBotao: {
@@ -361,49 +404,108 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 
+  searchArea: {
+    marginBottom: 12,
+  },
+
+  inputBusca: {
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#CBD5E1",
+    borderRadius: 14,
+    paddingHorizontal: 16,
+    paddingVertical: 13,
+    fontSize: 15,
+    color: "#111827",
+  },
+
   totalItens: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#374151",
-    marginBottom: 10,
-    textAlign: "center",
+    fontSize: 13,
+    fontWeight: "600",
+    color: "#475569",
+    marginTop: 8,
+    textAlign: "right",
   },
 
   card: {
     backgroundColor: "#FFFFFF",
-    padding: 14,
-    borderRadius: 14,
+    padding: 15,
+    borderRadius: 18,
     marginBottom: 12,
     borderWidth: 1,
     borderColor: "#E5E7EB",
   },
 
   cardCritico: {
+    backgroundColor: "#FFF1F2",
+    borderColor: "#FB7185",
+  },
+
+  cardSemEstoque: {
     backgroundColor: "#FEE2E2",
-    borderWidth: 1,
     borderColor: "#DC2626",
+  },
+
+  cardHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 6,
   },
 
   nomeMaterial: {
     fontSize: 17,
     fontWeight: "bold",
     color: "#111827",
-    marginBottom: 4,
+    flex: 1,
+    marginRight: 8,
+  },
+
+  quantidade: {
+    fontSize: 14,
+    color: "#4B5563",
+    marginBottom: 10,
+  },
+
+  badge: {
+    backgroundColor: "#DCFCE7",
+    color: "#166534",
+    fontSize: 11,
+    fontWeight: "bold",
+    paddingHorizontal: 9,
+    paddingVertical: 5,
+    borderRadius: 999,
+    overflow: "hidden",
+  },
+
+  badgeCritico: {
+    backgroundColor: "#FFE4E6",
+    color: "#BE123C",
+  },
+
+  badgeSemEstoque: {
+    backgroundColor: "#FECACA",
+    color: "#991B1B",
+  },
+
+  botoesLinha: {
+    flexDirection: "row",
+    gap: 10,
   },
 
   botaoBaixar: {
+    flex: 1,
     backgroundColor: "#16A34A",
     paddingVertical: 11,
-    borderRadius: 10,
+    borderRadius: 12,
     alignItems: "center",
-    marginTop: 8,
   },
 
   botaoExcluir: {
+    flex: 1,
     backgroundColor: "#DC2626",
     paddingVertical: 11,
-    borderRadius: 10,
+    borderRadius: 12,
     alignItems: "center",
-    marginTop: 8,
   },
 });

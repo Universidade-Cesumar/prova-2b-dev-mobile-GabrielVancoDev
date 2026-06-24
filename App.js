@@ -158,29 +158,40 @@ export default function App() {
     item.nome.toLowerCase().includes(busca.toLowerCase()),
   );
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Almoxarifado - Enfermagem</Text>
-      {/* Breve descrição do projeto inserida abaixo */}
-      {/* <Text style={styles.description}>
-        Este template servirá para desenvolver o projeto responsável por
-        modernizar o controle de insumos médicos do almoxarifado. Através desta
-        interface conectada à API, é possível realizar o inventário em tempo
-        real, cadastrar novos materiais e registrar baixas de estoque de forma
-        ágil e segura.
-      </Text> */}
+  const totalCadastrados = materiais.length;
 
-      <TextInput
-        testID="input-busca"
-        style={styles.input}
-        placeholder="Pesquisar material"
-        value={busca}
-        onChangeText={setBusca}
-      />
+  const totalEstoqueBaixo = materiais.filter(
+    (item) => Number(item.quantidade) > 0 && Number(item.quantidade) < 10,
+  ).length;
 
-      <Text testID="total-itens" style={styles.totalItens}>
-        Total de itens listados: {materiaisFiltrados.length}
-      </Text>
+  const totalSemEstoque = materiais.filter(
+    (item) => Number(item.quantidade) === 0,
+  ).length;
+
+ return (
+  <View style={styles.container}>
+    <Text style={styles.title}>Almoxarifado</Text>
+    <Text style={styles.subtitle}>Controle de insumos - Enfermagem</Text>
+
+    <View style={styles.dashboard}>
+      <View style={styles.dashboardCard}>
+        <Text style={styles.dashboardNumber}>{totalCadastrados}</Text>
+        <Text style={styles.dashboardLabel}>Itens cadastrados</Text>
+      </View>
+
+      <View style={styles.dashboardCard}>
+        <Text style={styles.dashboardNumber}>{totalEstoqueBaixo}</Text>
+        <Text style={styles.dashboardLabel}>Estoque baixo</Text>
+      </View>
+
+      <View style={styles.dashboardCard}>
+        <Text style={styles.dashboardNumber}>{totalSemEstoque}</Text>
+        <Text style={styles.dashboardLabel}>Sem estoque</Text>
+      </View>
+    </View>
+
+    <View style={styles.formCard}>
+      <Text style={styles.sectionTitle}>Cadastrar material</Text>
 
       <TextInput
         testID="input-nome"
@@ -206,45 +217,83 @@ export default function App() {
       >
         <Text style={styles.textoBotao}>Cadastrar</Text>
       </TouchableOpacity>
+    </View>
 
-      <FlatList
-        testID="lista-materiais"
-        data={materiaisFiltrados}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View
-            style={[
-              styles.card,
-              Number(item.quantidade) < 10 && styles.cardCritico,
-            ]}
-            accessibilityLabel={
-              Number(item.quantidade) < 10 ? "estoque-critico" : undefined
-            }
-          >
-            <Text style={styles.cardTitulo}>{item.nome}</Text>
-            <Text style={styles.cardQuantidade}>
-              Quantidade: {item.quantidade}
+    <View style={styles.searchArea}>
+      <TextInput
+        testID="input-busca"
+        style={styles.inputBusca}
+        placeholder="Pesquisar material..."
+        value={busca}
+        onChangeText={setBusca}
+      />
+
+      <Text testID="total-itens" style={styles.totalItens}>
+        Exibindo {materiaisFiltrados.length} item(ns)
+      </Text>
+    </View>
+
+    {loading && <ActivityIndicator size="large" />}
+
+    <FlatList
+      testID="lista-materiais"
+      data={materiaisFiltrados}
+      keyExtractor={(item) => item.id.toString()}
+      showsVerticalScrollIndicator={false}
+      renderItem={({ item }) => (
+        <View
+          style={[
+            styles.card,
+            Number(item.quantidade) < 10 && styles.cardCritico,
+            Number(item.quantidade) === 0 && styles.cardSemEstoque,
+          ]}
+          accessibilityLabel={
+            Number(item.quantidade) < 10 ? "estoque-critico" : undefined
+          }
+        >
+          <View style={styles.cardHeader}>
+            <Text style={styles.nomeMaterial}>{item.nome}</Text>
+
+            <Text
+              style={[
+                styles.badge,
+                Number(item.quantidade) < 10 && styles.badgeCritico,
+                Number(item.quantidade) === 0 && styles.badgeSemEstoque,
+              ]}
+            >
+              {Number(item.quantidade) === 0
+                ? "Sem estoque"
+                : Number(item.quantidade) < 10
+                ? "Crítico"
+                : "Disponível"}
             </Text>
-            <TextInput
-              testID="input-retirada"
-              style={styles.input}
-              placeholder="Quantidade a retirar"
-              keyboardType="numeric"
-              value={retiradas[item.id] || ""}
-              onChangeText={(valor) =>
-                setRetiradas({
-                  ...retiradas,
-                  [item.id]: valor,
-                })
-              }
-            />
+          </View>
 
+          <Text style={styles.quantidade}>
+            Quantidade: {item.quantidade}
+          </Text>
+
+          <TextInput
+            testID="input-retirada"
+            style={styles.input}
+            placeholder="Quantidade a retirar"
+            keyboardType="numeric"
+            value={retiradas[item.id] || ""}
+            onChangeText={(valor) =>
+              setRetiradas({
+                ...retiradas,
+                [item.id]: valor,
+              })
+            }
+          />
+
+          <View style={styles.botoesLinha}>
             <TouchableOpacity
               testID="btn-baixar"
               style={styles.botaoBaixar}
               onPress={() => baixarEstoque(item)}
             >
-              <Text style={styles.textoBotao}>Baixar estoque</Text>
+              <Text style={styles.textoBotao}>Baixar</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -255,10 +304,11 @@ export default function App() {
               <Text style={styles.textoBotao}>Excluir</Text>
             </TouchableOpacity>
           </View>
-        )}
-      />
-    </View>
-  );
+        </View>
+      )}
+    />
+  </View>
+);
 }
 
 const styles = StyleSheet.create({

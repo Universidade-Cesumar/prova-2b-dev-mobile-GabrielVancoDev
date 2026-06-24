@@ -60,6 +60,7 @@ export default function App() {
     } catch (error) {
       // Tratamento de erro
       console.log("Erro ao buscar materiais:", error);
+      alert("Não foi possível carregar os materiais. Verifique sua conexão.");
     } finally {
       setLoading(false);
     }
@@ -96,6 +97,7 @@ export default function App() {
       buscarMateriais();
     } catch (error) {
       console.log("Erro ao cadastrar material:", error);
+      alert("Não foi possível cadastrar o material. Tente novamente.");
     }
   };
   // --- Fim da Função de Requisição ---
@@ -262,74 +264,95 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#F4F7FB",
     paddingTop: 50,
-    paddingHorizontal: 20,
+    paddingHorizontal: 18,
   },
+
   title: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 10, // Reduzido ligeiramente para aproximar o texto explicativo
-    color: "#333",
+    marginBottom: 18,
+    color: "#1F2937",
   },
+
   description: {
     fontSize: 14,
-    color: "#666",
+    color: "#6B7280",
     textAlign: "center",
-    lineHeight: 20, // Dá um espaçamento confortável entre as linhas do parágrafo
-    marginBottom: 30, // Margem inferior para afastar o texto dos futuros inputs dos alunos
-  },
-  card: {
-    backgroundColor: "#f5f5f5",
-    padding: 12,
-    borderRadius: 8,
-    marginTop: 10,
+    lineHeight: 20,
+    marginBottom: 24,
   },
 
-  cardCritico: {
-    backgroundColor: "#FFE5E5",
-    borderWidth: 1,
-    borderColor: "#C62828",
-  },
-
-  nomeMaterial: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
   input: {
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
-    padding: 10,
+    borderColor: "#D1D5DB",
+    borderRadius: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
     marginBottom: 10,
+    fontSize: 15,
+    color: "#111827",
   },
 
   botao: {
-    backgroundColor: "#1976D2",
-    padding: 12,
-    borderRadius: 8,
+    backgroundColor: "#2563EB",
+    paddingVertical: 13,
+    borderRadius: 12,
     alignItems: "center",
-    marginBottom: 15,
+    marginBottom: 18,
   },
 
   textoBotao: {
-    color: "#fff",
+    color: "#FFFFFF",
     fontWeight: "bold",
+    fontSize: 14,
+  },
+
+  totalItens: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#374151",
+    marginBottom: 10,
+    textAlign: "center",
+  },
+
+  card: {
+    backgroundColor: "#FFFFFF",
+    padding: 14,
+    borderRadius: 14,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+  },
+
+  cardCritico: {
+    backgroundColor: "#FEE2E2",
+    borderWidth: 1,
+    borderColor: "#DC2626",
+  },
+
+  nomeMaterial: {
+    fontSize: 17,
+    fontWeight: "bold",
+    color: "#111827",
+    marginBottom: 4,
   },
 
   botaoBaixar: {
-    backgroundColor: "#2E7D32",
-    padding: 10,
-    borderRadius: 8,
+    backgroundColor: "#16A34A",
+    paddingVertical: 11,
+    borderRadius: 10,
     alignItems: "center",
     marginTop: 8,
   },
 
   botaoExcluir: {
-    backgroundColor: "#C62828",
-    padding: 10,
-    borderRadius: 8,
+    backgroundColor: "#DC2626",
+    paddingVertical: 11,
+    borderRadius: 10,
     alignItems: "center",
     marginTop: 8,
   },
